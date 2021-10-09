@@ -1,4 +1,4 @@
-import { DashbordComponent } from './Partage/Dashbord/Dashbord.component';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ModalDialogModule } from 'ngx-modal-dialog';
@@ -18,10 +18,12 @@ import { ListeServComponent } from './Admin/liste-serv/liste-serv.component';
 import { ListeComponent } from './Distributeur/liste/liste.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DetailsComponent } from './Etudiant/progression/details/details.component';
+import { PersonnelAuthComponent } from './personnel-auth/personnel-auth.component';
+import { HeaderComponent } from './Partage/header/header.component';
+import { FooterComponent } from './Partage/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DashbordComponent,
     AccueilComponent,
     ServicesComponent,
     ProgressionComponent,
@@ -30,6 +32,9 @@ import { DetailsComponent } from './Etudiant/progression/details/details.compone
     ListeServComponent,
     ListeComponent,
     DetailsComponent,
+    PersonnelAuthComponent,
+    HeaderComponent,
+    FooterComponent,
 
   ],
   imports: [

@@ -5268,7 +5268,6 @@ input.ui-editRangeSlider-inputValue {
   background: none;
 }
 .ui-rangeSlider .ui-rangeSlider-handle-inner {
-  background: url(../img/plugins/slider-knob.png) no-repeat center top;
   width: 22px;
   height: 24px;
 }
@@ -7320,7 +7319,7 @@ perspective effects (not including the modals and the overlay).
   transition: all 0.4s;
 }
 .mfp-fullscale.mfp-removing.mfp-bg {
-  background: #000\A;
+  background: #000;
   opacity: 0;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
@@ -13134,9 +13133,6 @@ button.close {
 }
 .bg-background.bg-topbar2 {
   background: url("../../../img/patterns/topbar-bg2.jpg") no-repeat center left;
-}
-.bg-background.bg-topbar3 {
-  background: url("../../../img/patterns/topbar-bg3.jpg") no-repeat center left;
 }
 .bg-background.bg-psuedo-tp:before,
 .bg-background.bg-psuedo-tp-dark:before,
@@ -24422,7 +24418,7 @@ blockquote.blockquote-dark {
 @media (min-width: 1140px) {
   body.boxed-layout {
     background-color: transparent !important;
-    background-image: url("../../../img/patterns/noise.png");
+
     background-repeat: repeat;
   }
   body.boxed-layout .navbar {

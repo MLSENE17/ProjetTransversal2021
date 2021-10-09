@@ -32,9 +32,17 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/fonts/glyphicons-pro/glyphicons-pro.css",
+              "src/assets/fonts/icomoon/icomoon.css",
+              "src/assets/skin/default_skin/css/theme.css",
+              "src/assets/admin-tools/admin-forms/css/admin-forms.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/vendor/jquery/jquery-1.11.1.min.js",
+              "src/vendor/jquery/jquery_ui/jquery-ui.min.js",
+              "src/assets/js/main.js"
+            ]
           },
           "configurations": {
             "production": {
