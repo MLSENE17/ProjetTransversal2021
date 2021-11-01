@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PersonnelAuthComponent } from './personnel-auth.component';
+import { CorbeilleComponent } from './corbeille.component';
 
-describe('PersonnelAuthComponent', () => {
-  let component: PersonnelAuthComponent;
-  let fixture: ComponentFixture<PersonnelAuthComponent>;
-  
+describe('CorbeilleComponent', () => {
+  let component: CorbeilleComponent;
+  let fixture: ComponentFixture<CorbeilleComponent>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PersonnelAuthComponent ]
+      declarations: [ CorbeilleComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PersonnelAuthComponent);
+    fixture = TestBed.createComponent(CorbeilleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

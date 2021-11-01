@@ -9,7 +9,7 @@
       <li class="dropdown menu-merge">
       <div   class="navbar-btn btn-group">
           <div style="font-size: 15px;cursor: pointer">
-          <span >
+          <span  (click)='logOut()'>
               <strong > Se deconnecter
               </strong>
           </span>
@@ -19,25 +19,56 @@
     </ul>
 </header>
 <aside id="sidebar_left" class="nano nano-light affix">
+
+    <!-- Start: Sidebar Left Content -->
     <div class="sidebar-left-content nano-content">
-            <div class="sidebar-widget author-widget">
-                <div class="media">
-                    <a class="media-left" href="#">
-                        <img src="assets/img/avatars/3.jpg" class="img-responsive">
-                    </a>
-                    <div class="media-body">
-                        <div class="media-author">Ibrahima DIOP</div>
-                    </div>
+
+        <!-- Start: Sidebar Header -->
+        <header class="sidebar-header">
+
+
+            <!-- Sidebar Widget - Search (hidden) -->
+            <div class="sidebar-widget search-widget hidden">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                     </span>
+                    <input type="text" id="sidebar-search" class="form-control" placeholder="Search...">
                 </div>
             </div>
+
+        </header>
+        <!-- End: Sidebar Header -->
+
+        <!-- Start: Sidebar Menu -->
         <ul class="nav sidebar-menu">
-            <li>
-                <a class="nav-link" routerLink="/etudiant/services" routerLinkActive="active">
-                    <span class="glyphicon glyphicon-book"></span>
-                    <span class="sidebar-title">accueil</span>
-                </a>
+            <li class="sidebar-label pt20" >
+                <span style="font-size: 15px;" class="glyphicon glyphicon-dashboard"></span>
+                <strong style="font-size: 15px;">Tableau de bord</strong> 
             </li>
-                            
-       </ul>
+            <li *ngFor="let item of menu" style="margin-right: 60px;">
+                <a class="accordion-toggle" routerLink='{{item.nameRoute}}' [routerLinkActive]="['actives']" style="height: 50px">
+                    <span class="glyphicon glyphicon-home"></span>
+                    <span style="font-size: 15px" class="sidebar-title">{{item.name}}</span>
+                    <span class="caret"></span>
+                </a>
+            </li >
+         
+          
+            <!-- sidebar resources -->
+        
+
+
+            <!-- sidebar bullets -->
+        </ul>
+        <!-- End: Sidebar Menu -->
+
+        <!-- Start: Sidebar Collapse Button -->
+                
+        <!-- End: Sidebar Collapse Button -->
+
+   
+    <!-- End: Sidebar Left Content -->
+
     </div>
 </aside>

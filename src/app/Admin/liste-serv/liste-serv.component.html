@@ -1,79 +1,169 @@
-<div class="tray tray-center">
-    <div class="panel mb25 mt5">
-      <div class="panel-heading">
-        <span class="panel-title hidden-xs">Ajouter Nouveau Service</span>
+<div id="main">
+  <app-header></app-header>
+  <section id="content_wrapper">
+    <br/> <br/> <br/> 
+    <header id="topbar" class="alt" style="position: fixed;">
+      <div class="topbar-left">
+          <ol class="breadcrumb">
+              <li class="crumb-active">
+                  <a href="dashboard.html">Dashboard</a>
+              </li>
+              <li class="crumb-icon">
+                  <a href="dashboard.html">
+                      <span class="glyphicon glyphicon-home"></span>
+                  </a>
+              </li>
+              <li class="crumb-link">
+                  <a href="index.html">Diplome</a>
+              </li>
+           
+          </ol>
       </div>
-      <div class="panel-body p25 pb5">
-        <div class="tab-content pn br-n admin-form">
-          <div id="tab1_1" class="tab-pane active">
-            <form class="form-horizontal" [formGroup]="InfoForm" (ngSubmit)="saveDemande()">
-                  <div class="section row">
-                    <div class="col-md-12">
-                      <label for="nom" class="field prepend-icon">
-                        <input type="text" name="nom" id="nom" class="gui-input" placeholder="Nom du service..."
-                        class="form-control"  formControlName="name"
-                        required>
-                        <div *ngIf="name.invalid && (name.dirty || name.touched)"
-                        class="alert alert-danger">
-                    
-                      <div *ngIf="name.errors?.required">
-                        Renseigner Ce champ
-                      </div>
-                        </div>
-                        <label for="nom" class="field-icon">
-                          <i class="fa fa-user"></i>
-                        </label>
-                      </label>
-                        </div> 
-                  </div>
-                  <div class="col-sm-12">
-                    <p class="text-right">
-                      <button class="btn btn-primary " type="submit" [disabled]="!InfoForm.valid">Enregistrer</button>
-                    </p>
-                  </div>
-            </form>
+  </header>
+  <br/> <br/> <br/> 
+    <div class="mt-5 container">
+      <div class="row">
+        <div class="col-md-6">
+          <button  type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter1">Ajouter un Diplome</button>
+        </div>
+      </div> <br/>
+      <div class="panel" id="spy1">
+        <div class="panel-heading">
+          <span class="panel-title">
+            <span class="fa fa-table"></span>Liste des diplomes</span>
+         
+        </div>
+        <div class="panel-body pn">
+          <table class="table footable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nom du Diplome</th>
+                  <th>Date de Creation</th>
+                  <th>Option</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of diplome;index as i">
+                  <td>{{i+1}}</td>
+                  <td>{{item.nomDiplome}}</td>
+                  <td>{{item.createAt|date: 'dd/MM/yyyy hh:mm a' }}</td>
+                  <td>
+                    <button title='modifier {{item.nomDiplome}}' type="button" class="btn btn-default light" (click)="onUpdate(item)">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                  </td>
+                </tr>
+               
+              </tbody>
+            </table>
+        </div>
+      </div>
+       <!-- End: Topbar-Dropdown -->
+       <div  class="modal fade" tabindex="-1" role="dialog" id="exampleModalCenter1" aria-labelledby="gridSystemModalLabel" >
+        <div class="modal-dialog" role="document" >
+          
+          <div class="modal-content">
+            <div class="modal-header">
+    
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="badge badge-danger">X</span></button>
+            
             </div>
+            <form  [formGroup]="formModal" (ngSubmit)="onSubmit()">
+              <div class="modal-body">
+               
+                  <h2 class="modal-title" id="gridSystemModalLabel" style="position: relative;">Ajouter un Diplome</h2>
+                  <div>
+                      <div class="admin-form">
+                        
+                            <div class="panel-body bg-light">
+                             
+                                  <div class="row"> 
+                                    <div class="col-md-12">
+                                      <label for="poste" class="field prepend-icon">
+                                        <input type="text" formControlName="nameDiplome" class="gui-input" placeholder="Diplome"
+                                        class="form-control"  
+                                        required >
+    
+                                        <label for="poste" class="field-icon">
+                                          <i class="fa fa-user"></i>
+                                        </label>
+                                      </label>
+                                    </div>
+                                  </div>
+                            
+                           
+                             </div>
+                        </div>
+                        
+                    </div>
+                    
+                  
+              </div> <br>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button name="change_annee" type="submit" class="btn btn-primary" [disabled]="formModal.invalid">Enregistrer</button>
+              </div>
+            </form>
           </div>
+          
+          </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+     <!-- End: Topbar-Dropdown update -->
+     <button id="lamine" class="hidden" type="button"  data-toggle="modal" data-target="#exampleModalCenter11" >Lamine</button>
+     <div  class="modal fade" tabindex="-1" role="dialog" id="exampleModalCenter11" aria-labelledby="gridSystemModalLabel" >
+      <div class="modal-dialog" role="document" >
+        
+        <div class="modal-content">
+          <div class="modal-header">
+  
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="badge badge-danger">X</span></button>
+          
+          </div>
+          <form  [formGroup]="formModalUpdate" (ngSubmit)="onSubmitUpdate()">
+            <div class="modal-body">
+             
+                <h2 class="modal-title" id="gridSystemModalLabel" style="position: relative;">Modifier un Diplome : {{oneDiplome?oneDiplome.nomDiplome:''}}</h2>
+                <div>
+                    <div class="admin-form">
+                      
+                          <div class="panel-body bg-light">
+                           
+                                <div class="row"> 
+                                  <div class="col-md-12">
+                                    <label for="poste" class="field prepend-icon">
+                                      <input type="text" formControlName="nameDiplome" class="gui-input" placeholder="Diplome"
+                                      class="form-control"  
+                                      required >
+  
+                                      <label for="poste" class="field-icon">
+                                        <i class="fa fa-user"></i>
+                                      </label>
+                                    </label>
+                                  </div>
+                                </div>
+                          
+                         
+                           </div>
+                      </div>
+                      
+                  </div>
+                  
+                
+            </div> <br>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button name="change_annee" type="submit" class="btn btn-primary" [disabled]="formModalUpdate.invalid">Enregistrer</button>
+            </div>
+          </form>
         </div>
-        </div>
-    <div class="panel" style="margin-top: 20px;">
-      <div class="panel-menu admin-form theme-primary">
-          Liste dess Services
-      </div>
-      <div class="panel-body pn">
-        <div class="table-responsive">
-          <table class="table admin-form theme-warning tc-checkbox-1 fs13">
-            <thead>
-              <tr class="bg-light">
-                <th class="">Compte ID</th>
-                <th class="">Nom Service</th>
-                <th class="">Niveau du Service</th>
-                <th class="">Nombre de demandes en cours</th>
-              </tr>
-            </thead>
-            <tbody>      
-              <tr>
-                <td >#50362061</td>
-                <td >Attestation de Russite</td>
-                <td >Licence</td>
-                <td >21/td>
-              </tr>
-              <tr>
-                <td >#50362061</td>
-                <td >Attestation de Russite</td>
-                <td >Licence</td>
-                <td >21/td>
-              </tr>
-              <tr>
-                <td >#50362061</td>
-                <td >Attestation de Russite</td>
-                <td >Licence</td>
-                <td >21/td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+        
+        </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+    <!-- End: Topbar-Dropdown -->
+      <app-footer></app-footer>
     </div>
+  
+  </section>
 
-  </div>
+</div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CompteService } from 'src/app/service/CompteService';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-compte',
@@ -7,35 +9,98 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./compte.component.css']
 })
 export class CompteComponent implements OnInit {
-  public InfoForm :any = [];
-  public saveDemande() : void{
-    alert("Bien")
-    console.log(this.InfoForm.value.type);
-    console.log(this.InfoForm.value.poste);
-  }
-
-  constructor() { }
+  isActive:Boolean=false;
+  places:any;
+  users:any;
+  formModal=new FormGroup({
+    prenom:new FormControl('',[Validators.required,Validators.minLength(2)]),
+    nom:new FormControl('',[Validators.required,Validators.minLength(2)]),
+    email:new FormControl('',[Validators.email ,Validators.required,Validators.minLength(2)]),
+    role:new FormControl('ADMIN',[Validators.required]),
+    place:new FormControl('1',[Validators.required]),
+  })
+  constructor(private compteService:CompteService) { }
 
   ngOnInit(): void {
-    this.InfoForm = new FormGroup({
-      type: new FormControl("", [
-        Validators.required,
-      ]),
-      poste: new FormControl("", [
-        Validators.required,
-      ]),
-      email: new FormControl("", [
-        Validators.required,
-      ]),
-      mdp: new FormControl("", [
-        Validators.required,
-        Validators.minLength(8),
-      ])
-    });
+    this.getAllPlace()
+    this.getUser()
   }
-  get type() { return this.InfoForm.get('type'); }
-  get poste() { return this.InfoForm.get('poste'); }
-  get email() { return this.InfoForm.get('email'); }
-  get mdp() { return this.InfoForm.get('mdp'); }
-
+  onDelete(id:any,email:any){
+    Swal.fire({
+      title: 'Voulez vous supprimer cet utilisateur?',
+      showDenyButton: true,
+      confirmButtonText: 'Oui',
+      denyButtonText: 'Non',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.compteService.delete(id,email).subscribe(
+          (res)=>{
+            Swal.fire({
+              icon: 'success',
+              title: 'Oops...',
+              text: 'User bien supprimer'
+            })
+            this.getUser()
+          },
+          (error)=>{
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'User non supprimer'
+            })
+          }
+        )
+      } 
+    })
+   
+   
+  }
+  getAllPlace(){
+    this.compteService.getAllPlace().subscribe(
+      (res)=>{
+        
+          this.places=res;        
+      }
+    )
+  }
+  onChangeRole(){
+    const a= this.formModal.value.role
+    if(a==="SIGNATAIRE"){
+      this.isActive=true
+      this.formModal.controls.place.setValue('')
+    }else{
+      this.isActive=false
+      this.formModal.controls.place.setValue('1')
+     
+    }
+  }
+  onSubmit(){
+    this.compteService.createUser(this.formModal.value).subscribe(
+      (res)=>{
+        let element: HTMLElement = document.getElementsByClassName('close')[0] as HTMLElement;
+        element.click();
+        Swal.fire({
+          icon: 'success',
+          title: 'Oops...',
+          text: 'User bien supprimer'
+        })
+          this.getUser()
+      },
+      (error)=>{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.error.message
+        })
+      }
+    )
+  }
+  getUser(){
+    this.compteService.getAllUsers().subscribe(
+      (res)=>{
+        this.users=res
+      }
+    )
+  }
 }

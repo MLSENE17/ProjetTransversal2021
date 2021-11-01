@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AccueilComponent } from './Etudiant/accueil/accueil.component';
 import { ServicesComponent } from './Etudiant/services/services.component';
 import { ProgressionComponent } from './Etudiant/progression/progression.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
@@ -21,6 +21,14 @@ import { DetailsComponent } from './Etudiant/progression/details/details.compone
 import { PersonnelAuthComponent } from './personnel-auth/personnel-auth.component';
 import { HeaderComponent } from './Partage/header/header.component';
 import { FooterComponent } from './Partage/footer/footer.component';
+import { HostService } from './service/HostService';
+import { LoginService } from './service/LoginService';
+import { AuthInterceptor } from './setting/AuthInterceptor';
+import { HomeComponent } from './signataire/home/home.component';
+import { CorbeilleComponent } from './signataire/corbeille/corbeille.component';
+import { DiplomeService } from './service/DiplomeService';
+import { CompteService } from './service/CompteService';
+import { EtudiantService } from './service/EtudiantService';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +43,8 @@ import { FooterComponent } from './Partage/footer/footer.component';
     PersonnelAuthComponent,
     HeaderComponent,
     FooterComponent,
+    HomeComponent,
+    CorbeilleComponent,
 
   ],
   imports: [
@@ -50,7 +60,14 @@ import { FooterComponent } from './Partage/footer/footer.component';
     ModalDialogModule.forRoot()
     
   ],
-  providers: [],
+  providers: [
+    HostService,
+    LoginService,
+    DiplomeService,
+    CompteService,
+    EtudiantService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

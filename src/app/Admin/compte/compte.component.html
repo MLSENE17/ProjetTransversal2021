@@ -1,139 +1,177 @@
-        <div class="tray tray-center">
-          <div class="panel mb25 mt5">
-            <div class="panel-heading">
-              <span class="panel-title hidden-xs">Créer Nouveau Compte</span>
-            </div>
-            <div class="panel-body p25 pb5">
-              <div class="tab-content pn br-n admin-form">
-                <div id="tab1_1" class="tab-pane active">
-                  <form class="form-horizontal" [formGroup]="InfoForm" (ngSubmit)="saveDemande()">
-                  <div class="section row">
-                    <div class="col-md-6">
-                      <label for="compte" class="field prepend-icon">
-                        <input type="text" name="type" id="type" class="gui-input" placeholder="Type de Compte..."
-                        class="form-control"  formControlName="type"
-                              required >
-                              <div *ngIf="type.invalid && (type.dirty || type.touched)"
-                              class="alert alert-danger">
-                          
-                            <div *ngIf="type.errors?.required">
-                              Renseigner le type de compte
-                            </div>
-                          </div>
-            
-                        <label for="firstname" class="field-icon">
-                          <i class="fa fa-user"></i>
-                        </label>
-                      </label>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="email" class="field prepend-icon">
-                        <input type="email" name="email" id="email" class="gui-input" placeholder="Email address"
-                        class="form-control"  formControlName="email"
-                        required >
-                        <div *ngIf="email.invalid && (email.dirty || email.touched)"
-                        class="alert alert-danger">
-                    
-                      <div *ngIf="email.errors?.required">
-                        Renseigner l'email du proprietaire
-                      </div>
-                    </div>
-                        <label for="email" class="field-icon">
-                          <i class="fa fa-envelope"></i>
-                        </label>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="section row">
-                    <div class="col-md-6">
-                      <label for="poste" class="field prepend-icon">
-                        <input type="text" name="poste" id="poste" class="gui-input" placeholder="Poste..."
-                        class="form-control"  formControlName="poste"
-                        required >
-                        <div *ngIf="poste.invalid && (poste.dirty || poste.touched)"
-                        class="alert alert-danger">
-                    
-                      <div *ngIf="poste.errors?.required">
-                        Renseigner le poste du proprietaire
-                      </div>
-                    </div>
-                        <label for="poste" class="field-icon">
-                          <i class="fa fa-user"></i>
-                        </label>
-                      </label>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="mobile" class="field prepend-icon">
-                        <input type="password" name="password" id="password" class="gui-input" placeholder="Mot de passe"
-                        class="form-control"  formControlName="mdp"
-                        required minlength="8">
-                        <div *ngIf="mdp.invalid && (mdp.dirty || mdp.touched)"
-                        class="alert alert-danger">
-                    
-                      <div *ngIf="mdp.errors?.required">
-                        Renseigner le mot de passe du proprietaire
-                      </div>
-                      <div *ngIf="mdp.errors?.minlength">
-                        8 caractères au minimum
-                      </div>
-                    </div>
-                        <label for="password" class="field-icon">
-                          <i class="fa fa-phone-square"></i>
-                        </label>
-                      </label>
-                    </div>
-                  </div>  
-                    <div class="col-sm-12">
-                      <p class="text-right">
-                        <button class="btn btn-primary " type="submit" [disabled]="!InfoForm.valid">Enregistrer</button>
-                      </p>
-                    </div>
-                  </form>
-                  </div>
-                </div>
-              </div>
-          <div class="panel" style="margin-top: 20px;">
-            <div class="panel-menu admin-form theme-primary">
-                Liste dess Comptes
-            </div>
-            <div class="panel-body pn">
-              <div class="table-responsive">
-                <table class="table admin-form theme-warning tc-checkbox-1 fs13">
-                  <thead>
-                    <tr class="bg-light">
-                      <th class="">Compte ID</th>
-                      <th class="">Type</th>
-                      <th class="">Poste</th>
-                      <th class="">Email</th>
-                      <th class="text-center">Mot de passe</th>
-                    </tr>
-                  </thead>
-                  <tbody>      
-                    <tr>
-                      <td >#50362061</td>
-                      <td >Signataire</td>
-                      <td >genieInf</td>
-                      <td >ibrahimadiop6@esp.sn</td>
-                      <td > Mot de passe</td>
-                    </tr>
-                    <tr>
-                        <td >#50362061</td>
-                        <td >Personne X</td>
-                        <td >_</td>
-                        <td >ibrahimadiop6@esp.sn</td>
-                        <td > Mot de passe</td>
-                      </tr>
-                      <tr>
-                        <td >#50362061</td>
-                        <td >Signataire</td>
-                        <td >finances</td>
-                        <td >ibrahimadiop6@esp.sn</td>
-                        <td > Mot de passe</td>
-                      </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
+<div id="main">
+  <app-header></app-header>
+  <section id="content_wrapper">
+    <br/> <br/> <br/> 
+    <header id="topbar" class="alt" style="position: fixed;">
+      <div class="topbar-left">
+          <ol class="breadcrumb">
+              <li class="crumb-active">
+                  <a href="dashboard.html">Dashboard</a>
+              </li>
+              <li class="crumb-icon">
+                  <a href="dashboard.html">
+                      <span class="glyphicon glyphicon-home"></span>
+                  </a>
+              </li>
+              <li class="crumb-link">
+                  <a href="index.html">Diplome</a>
+              </li>
+           
+          </ol>
+      </div>
+  </header>
+  <br/> <br/> <br/> 
+    <div class="mt-5 container">
+      <div class="row">
+        <div class="col-md-6">
+          <button  type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter1">Ajouter un Personnel</button>
         </div>
+      </div> <br/>
+      <div class="panel" id="spy1">
+        <div class="panel-heading">
+          <span class="panel-title">
+            <span class="fa fa-table"></span>Liste des diplomes</span>
+         
+        </div>
+        <div class="panel-body pn">
+          <table class="table footable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Prenom & Nom</th>
+                  <th>Email</th>
+                  <th>Role</th> 
+                  <th>Lieu</th>
+                  <th>Option</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of users;index as i">
+                  <td>{{i+1}}</td>
+                  <td>{{item.prenom+" "+item.nom}}</td>
+                  <td>{{item.email}}</td>
+                  <td></td>
+                  <td>{{item.place}}</td>
+                  <td>
+                    <button title='Supprimer {{item.prenom+" "+item.nom}}' type="button" class="btn btn-default light" (click)="onDelete(item.id,item.email)">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+               
+              </tbody>
+            </table>
+        </div>
+      </div>
+       <!-- End: Topbar-Dropdown -->
+       <div  class="modal fade" tabindex="-1" role="dialog" id="exampleModalCenter1" aria-labelledby="gridSystemModalLabel" >
+        <div class="modal-dialog" role="document" >
+          
+          <div class="modal-content">
+            <div class="modal-header">
+    
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="badge badge-danger">X</span></button>
+            
+            </div>
+            <form [formGroup]="formModal" (ngSubmit)="onSubmit()">
+              <div class="modal-body">
+               
+                  <h2 class="modal-title" id="gridSystemModalLabel" style="position: relative;">Ajouter un Diplome</h2>
+                  <div>
+                      <div class="admin-form">
+                        
+                            <div class="panel-body bg-light">
+                             
+                                  <div class="row"> 
+                                    <div class="col-md-6">
+                                      <h4>Prenom</h4>
+                                      <label for="poste" class="field prepend-icon"> 
+                                        <input type="text" class="gui-input" placeholder="Diplome"
+                                        class="form-control" formControlName="prenom" 
+                                        required >
+    
+                                        <label for="poste" class="field-icon">
+                                          <i class="fa fa-user"></i>
+                                        </label>
+                                      </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <h4>Nom</h4>
+                                      <label for="poste" class="field prepend-icon">
+                                        <input type="text" class="gui-input" placeholder="Diplome"
+                                        class="form-control"  formControlName="nom"
+                                        required >
+    
+                                        <label for="poste" class="field-icon">
+                                          <i class="fa fa-user"></i>
+                                        </label>
+                                      </label>
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="row"> 
+                                    <div class="col-md-6">
+                                      <h4>Email</h4>
+                                      <label for="poste" class="field prepend-icon">
+                                        <input type="email" class="gui-input" placeholder="Diplome"
+                                        class="form-control"  formControlName="email" 
+                                        required >
+    
+                                        <label for="poste" class="field-icon">
+                                          <i class="fa fa-envelope"></i>
+                                        </label>
+                                      </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <h4>Role</h4>
+                                      <div class="section mb15">
+                                        <label class="field select">
+                                          <select formControlName="role" id="filter-categories" name="filter-categories"  (change)="onChangeRole()">
+                                            <option value="ADMIN" selected="selected">ADMIN</option>
+                                            <option value="SIGNATAIRE">SIGNATAIRE</option>
+                                            <option value="SECRETAIRE">SECRETAIRE</option>
+                                          </select>
+                                          <i class="arrow double"></i>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                 
+                                  <div class="row" *ngIf="isActive"> 
+                                    <div class="col-md-12">
+                                      <h4>Place Signataire</h4>
+                                      <div class="section mb15">
+                                        <label class="field select">
+                                          <select formControlName="place" id="filter-categories" name="filter-categories">
+                                            <option *ngFor="let item of places"  value='{{item.id}}' selected="selected">{{item.namePlace}}</option>
+                                          </select>
+                                          <i class="arrow double"></i>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                           
+                             </div>
+                        </div>
+                        
+                    </div>
+                    
+                  
+              </div> <br>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button name="change_annee" type="submit" class="btn btn-primary" [disabled]="formModal.invalid">Enregistrer</button>
+              </div>
+            </form>
+          </div>
+          
+          </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+     <!-- End: Topbar-Dropdown update -->
+     
+      <app-footer></app-footer>
+    </div>
+  
+  </section>
+
+</div>

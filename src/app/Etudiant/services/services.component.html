@@ -1,83 +1,99 @@
-  <div class="panel-body border">
-    <div class="panel">
-      <div class="panel-heading">
-        <span class="panel-title">Faire une demande</span>
+<div id="main">
+  <app-header></app-header>
+  <section id="content_wrapper">
+    <br/> <br/> <br/> 
+    <header id="topbar" class="alt" style="position: fixed;">
+      <div class="topbar-left">
+          <ol class="breadcrumb">
+              <li class="crumb-active">
+                  <a href="dashboard.html">Dashboard</a>
+              </li>
+              <li class="crumb-icon">
+                  <a href="dashboard.html">
+                      <span class="glyphicon glyphicon-home"></span>
+                  </a>
+              </li>
+              <li class="crumb-link">
+                  <a href="index.html">Diplome</a>
+              </li>
+           
+          </ol>
       </div>
-      <div class="panel-body">
-        <form class="form-horizontal" (ngSubmit)="saveDemande()" #serviceForm>
-          
-                    <div class="form-group">
-                      <label class="col-md-3 control-label" for="serviceNameId">Nom de la Demande</label>
-                      <div class="col-md-8">
-                        <select id="serviceNameId" class="select2-single form-control" formControlName="serviceName">
-                          <option >Atttestation DUT</option>
-                          <option >Attestation Licence</option>
-                          <option >Attestation Master</option>
-                          <option >Attestation DIC</option>
-                          <option >Attestation DIT</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-md-11 control-label">
-                          <button type="submit" class="btn btn-rounded-outline btn-success btn-inline"
-                          [disabled]="!serviceForm.checkValidity">Soumettre</button>
-                      </div>
-                        </div>
-                        </form>
+  </header>
+  <br/> <br/> <br/> 
+    <div class="mt-5 container">
+      <div class="row">
+           <div class="col-md-12">
+            <div class="panel-body border">
+              <div class="panel">
+                <div class="panel-heading">
+                  <span class="panel-title">Faire une demande</span>
+                </div>
+                <div class="panel-body">
+                  <form class="form-horizontal" [formGroup]="formModal" (ngSubmit)="onSubmit()" #serviceForm>
+                    
+                              <div class="form-group">
+                                <label class="col-md-3 control-label" for="serviceNameId">Selectionner le diplome</label>
+                                <div class="col-md-8">
+                                  <select id="serviceNameId" class="select2-single form-control" formControlName="diplome">
+                                    <option value='' selected="selected">Please select</option>
+                                    <option *ngFor="let item of diplomes" value='{{item.id}}'>{{item.nomDiplome}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-md-11 control-label">
+                                  
+                                    <button type="submit" class="btn btn-rounded-outline btn-primary btn-inline"
+                                    [disabled]="formModal.invalid || loading">
+                                        <div *ngIf="loading">
+                                          Loading... <div class="spinner-border text-danger" role="status">
+                                          <span class="sr-only">Loading...</span>
+                                      </div>
+                                    </div>
+                                <span *ngIf="!loading">Soumettre</span></button>
+                                </div>
+                                  </div>
+                                  </form>
+                              </div>
+                            </div>
+              <div class="panel" id="spy4">
+                <div class="panel-heading">
+                  <span class="panel-title">
+                    <span class="fa fa-table"></span>Historque des demandes</span>
+                  <div class="pull-right hidden-xs">
+                    <code class="mr20"></code>
+                  </div>
+                </div>
+                <div class="panel-body pn">
+                  <div class="table-responsive">
+                    <div class="bs-component">
+                      <table class="table footable">
+                        <thead>
+                          <tr>
+                            <th>ID-Demande</th>
+                            <th>Nom du document démandé</th>
+                            <th>Statut</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of demandes;index as i">
+                            <td>{{i+1}}</td>
+                            <td>{{item.diplome}}</td>
+                            <td>{{item.create|date: 'dd/MM/yyyy hh:mm a'}}</td>
+                            <td  [ngClass]="{'success': item.valide,'warning':!item.valide}" class="success" title= '{{item.valide?"Votre pouver retirer votre demande au niveau du secrétariat":"Votre demande est en cours"}}'>{{item.valide?'Reussi':'En Attente'}}</td>
+                          </tr><tr></tr>
+                         
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-    <div class="panel" id="spy4">
-      <div class="panel-heading">
-        <span class="panel-title">
-          <span class="fa fa-table"></span>Historque des demandes</span>
-        <div class="pull-right hidden-xs">
-          <code class="mr20"></code>
-        </div>
+                </div>
+              </div>
+           </div>
       </div>
-      <div class="panel-body pn">
-        <div class="table-responsive">
-          <div class="bs-component">
-            <table class="table table-bordered mbn">
-              <thead>
-                <tr>
-                  <th>ID-Demande</th>
-                  <th>Nom du document démandé</th>
-                  <th>Niveau du document</th>
-                  <th>Statut</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Attestation de Réussite</td>
-                  <td>Licence</td>
-                  <td class="success" >Réussi</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Attestation depassage</td>
-                  <td>DUT</td>
-                  <td class="danger">Echoué</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Bulletin de Notes</td>
-                  <td>DIC2</td>
-                  <td class="warning">Suspendu</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Bulletin de notes</td>
-                  <td>DUT1</td>
-                  <td class="success">Réussi</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
+        <app-footer></app-footer>
+    </div>    
 
 
 

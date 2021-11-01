@@ -1,31 +1,61 @@
-<div class="panel" id="spy4">
-    <div class="panel-heading">
-      <span class="panel-title">
-        <span class="fa fa-arrows-v"></span>Demandes en cours</span>
-      <div class="pull-right">
-        <code class="mr20">Appuyez sur Voir plus pour voir</code>
+<div id="main">
+  <app-header></app-header>
+  <section id="content_wrapper">
+    <br/> <br/> <br/> 
+    <header id="topbar" class="alt" style="position: fixed;">
+      <div class="topbar-left">
+          <ol class="breadcrumb">
+              <li class="crumb-active">
+                  <a href="dashboard.html">Dashboard</a>
+              </li>
+              <li class="crumb-icon">
+                  <a href="dashboard.html">
+                      <span class="glyphicon glyphicon-home"></span>
+                  </a>
+              </li>
+              <li class="crumb-link">
+                  <a href="index.html">Diplome</a>
+              </li>
+           
+          </ol>
+      </div>
+  </header>
+  <br/> <br/> <br/> 
+    <div class="mt-5 container">
+      <div class="row">
+           <div class="col-md-12">
+              <div class="panel" id="spy4">
+                  <div class="panel-heading">
+                    <span class="panel-title">
+                      <span class="fa fa-arrows-v"></span>Demandes en cours</span>
+                   
+                  </div>
+                  <div class="panel-body pn">
+                    <table class="table footable fw-labels" data-page-size="20">
+                      <thead>
+                        <tr>
+                          <th>Id</th>
+                          <th data-toggle="true">Nom Demande</th>
+                          <th>Statut</th>
+                          <th>Details</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="row-primary" *ngFor="let item of demandes;index as i">
+                          <td>{{i+1}}</td>
+                          <td>{{item.diplome}}</td>
+                          <td>En Attente</td>
+                          <td>
+                            <button class="btn btn-xs btn-primary" [routerLink]="['/etudiant','progression',item.id]">Voir Plus</button>
+                          </td>
+                        </tr>  
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
       </div>
     </div>
-    <div class="panel-body pn">
-      <table class="table footable fw-labels" data-page-size="20">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th data-toggle="true">Nom Demande</th>
-            <th>Statut</th>
-            <th>Details</th>
-            </tr>
-        </thead>
-        <tbody>
-          <tr class="row-primary" *ngFor="let ml of MaListe">
-            <td>{{ml.id}}</td>
-            <td>{{ml.Nom}}</td>
-            <td>{{ml.Statut}}</td>
-            <td>
-              <button class="btn btn-xs btn-primary" [routerLink]="['/etudiant','progression',ml.Nom]">Voir Plus</button>
-            </td>
-          </tr>  
-        </tbody>
-      </table>
-    </div>
+  </section>
+  <app-footer></app-footer>
   </div>

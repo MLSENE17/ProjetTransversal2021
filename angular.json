@@ -41,6 +41,7 @@
             "scripts": [
               "src/vendor/jquery/jquery-1.11.1.min.js",
               "src/vendor/jquery/jquery_ui/jquery-ui.min.js",
+              "src/assets/js/utility/utility.js",
               "src/assets/js/main.js"
             ]
           },

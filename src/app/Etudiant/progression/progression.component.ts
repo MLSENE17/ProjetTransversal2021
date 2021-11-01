@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
-import { ListeService } from './liste.service';
-import {IProg} from './listeModel'
+import { EtudiantService } from 'src/app/service/EtudiantService';
 
 
 @Component({
@@ -10,22 +8,19 @@ import {IProg} from './listeModel'
   styleUrls: ['./progression.component.css']
 })
 export class ProgressionComponent implements OnInit {
-  public constructor(public readonly swalTargets: SwalPortalTargets,
-    private Listedemande: ListeService) {
+  demandes:any
+  public constructor(private etudiantService:EtudiantService) {
   }
-
-  public MaListe : IProg[] = [];
-  public errorMsg: string ="";
-
   ngOnInit(): void {
-
-    this.Listedemande.getdemande().subscribe({
-      next: MaListe => {
-        this.MaListe = MaListe;
-      },
-      error: err => this.errorMsg = err
-    });
-
+    this.getAllCours();
+  }
+  getAllCours(){
+    const menus= JSON.parse(localStorage.getItem('user')|| '{}')
+    this.etudiantService.getCours(menus.email).subscribe(
+      (res)=>{
+        this.demandes=res;      
+      }
+    )
   }
   
 
