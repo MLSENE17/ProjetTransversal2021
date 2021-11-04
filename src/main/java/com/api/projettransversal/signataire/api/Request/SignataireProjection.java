@@ -7,4 +7,5 @@ public interface SignataireProjection {
    String getNumero();
    String getDiplome();
     String getResponse();
+    String getMessage();
 }

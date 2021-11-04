@@ -26,7 +26,7 @@ public interface ValidationRepository extends JpaRepository<Validation,Long> {
     boolean isValid(@Param("demande") Demande demande, ResponseEnum responseEnum);
     @Query("select vl.id as id,vl.demande.etudiant.prenom as prenom, vl.demande.etudiant.nom as nom, " +
             "vl.demande.etudiant.numeroEtudiant as numero,vl.demande.diplome.nomDiplome as diplome," +
-            "vl.response as response  from Validation vl where vl.placeSignatory=:placeSignatory and" +
+            "vl.response as response,vl.message as message   from Validation vl where vl.placeSignatory=:placeSignatory and" +
             "(:numero is null or upper(vl.demande.etudiant.numeroEtudiant) = :numero) and " +
             "(:status is null or vl.response = :status)")
     List<SignataireProjection> AllBySign(
@@ -36,7 +36,7 @@ public interface ValidationRepository extends JpaRepository<Validation,Long> {
     );
     @Query("select vl.id as id,vl.demande.etudiant.prenom as prenom, vl.demande.etudiant.nom as nom, " +
             "vl.demande.etudiant.numeroEtudiant as numero,vl.demande.diplome.nomDiplome as diplome," +
-            "vl.response as response from Validation vl " +
+            "vl.response as response,vl.message as message from Validation vl " +
             "where vl.id=:id and vl.placeSignatory=:placeSignatory")
     Optional<SignataireProjection> getOne(
             @Param("id") Long id,@Param("placeSignatory")  PlaceSignatory placeSignatory

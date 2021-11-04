@@ -26,7 +26,7 @@ public class SignataireController {
     public  Optional<SignataireProjection> getOne(@Valid @PathVariable Long id,@Valid @PathVariable Long place){
         return signataireService.getOne(id,place);
     }
-    @PostMapping
+    @PostMapping("/demande")
     public Map<String,String> allSign(@Valid @RequestBody MessageRequestSignataire messageRequestSignataire){
         return signataireService.signIn(messageRequestSignataire);
     }
