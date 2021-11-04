@@ -25,10 +25,13 @@ import { HostService } from './service/HostService';
 import { LoginService } from './service/LoginService';
 import { AuthInterceptor } from './setting/AuthInterceptor';
 import { HomeComponent } from './signataire/home/home.component';
-import { CorbeilleComponent } from './signataire/corbeille/corbeille.component';
 import { DiplomeService } from './service/DiplomeService';
 import { CompteService } from './service/CompteService';
 import { EtudiantService } from './service/EtudiantService';
+import { SignataireService } from './service/SignataireService';
+import { MessageComponent } from './signataire/message/message.component';
+import { VitrineComponent } from './vitrine/vitrine.component';
+import { VitrineService } from './service/VitrineService';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +47,8 @@ import { EtudiantService } from './service/EtudiantService';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    CorbeilleComponent,
+    MessageComponent,
+    VitrineComponent,
 
   ],
   imports: [
@@ -66,6 +70,8 @@ import { EtudiantService } from './service/EtudiantService';
     DiplomeService,
     CompteService,
     EtudiantService,
+    SignataireService,
+    VitrineService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

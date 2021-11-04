@@ -10,9 +10,12 @@ import { ServicesComponent } from './Etudiant/services/services.component';
 import { ListeComponent } from './Distributeur/liste/liste.component';
 import { PersonnelAuthComponent } from './personnel-auth/personnel-auth.component';
 import { HomeComponent } from './signataire/home/home.component';
-import { CorbeilleComponent } from './signataire/corbeille/corbeille.component';
+import { MessageComponent } from './signataire/message/message.component';
+import { VitrineComponent } from './vitrine/vitrine.component';
 
 const routes: Routes = [
+  //accueil
+  { path: '', component:  VitrineComponent },
   //{ path: '/', redirectTo:'personnel/login'},
   { path: 'login', component:  PersonnelAuthComponent },
   //etudiant
@@ -25,10 +28,10 @@ const routes: Routes = [
   {path: 'admin/comptes', component: CompteComponent},
   {path: 'admin/home', component: StatistiqueComponent},
   //personne x
-  {path: 'liste', component: ListeComponent},
+  {path: 'secretairw/liste', component: ListeComponent},
   //signataire
   {path: 'signataire/home', component: HomeComponent},
-  {path: 'signataire/corbeille', component: CorbeilleComponent},
+  {path: 'signataire/home/message/:id', component: MessageComponent},
 ];
 
 @NgModule({

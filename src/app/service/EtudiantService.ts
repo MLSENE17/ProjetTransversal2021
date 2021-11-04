@@ -15,4 +15,10 @@ export class EtudiantService{
    getCours(email:any){
     return this.http.get(this.host.getHost()+"demande/encours/"+email)
   }
+  getSignature(id:any,email:any){
+    return this.http.get(this.host.getHost()+"validation/"+id+"/"+email)
+  }
+  getIsValid(id:any,email:any){
+    return this.http.get(this.host.getHost()+"validation/valid/"+id+"/"+email)
+  }
 }

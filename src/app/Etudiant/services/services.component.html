@@ -81,7 +81,7 @@
                             <td>{{i+1}}</td>
                             <td>{{item.diplome}}</td>
                             <td>{{item.create|date: 'dd/MM/yyyy hh:mm a'}}</td>
-                            <td  [ngClass]="{'success': item.valide,'warning':!item.valide}" class="success" title= '{{item.valide?"Votre pouver retirer votre demande au niveau du secrétariat":"Votre demande est en cours"}}'>{{item.valide?'Reussi':'En Attente'}}</td>
+                            <td  [ngClass]="{'success': item.valide,'warning':!item.valide}" title= '{{item.valide?"Votre pouver retirer votre demande au niveau du secrétariat":"Votre demande est en cours"}}'>{{item.valide?'Reussi':'En Attente'}}</td>
                           </tr><tr></tr>
                          
                         </tbody>
@@ -93,7 +93,10 @@
            </div>
       </div>
         <app-footer></app-footer>
-    </div>    
+    </div>  
+    </div>
+    </section>
+    </div>  
 
 
 

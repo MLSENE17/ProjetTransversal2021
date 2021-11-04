@@ -1,0 +1,319 @@
+
+<body>
+  <!-- Header -->
+  <section id="header">
+    <div class="header ">
+      <div class="nav-bar">
+        <div class="brand">
+          <a href="#hero">
+            <h1><span>Nom </span>de <span>la </span>plateforme</h1>
+          </a>
+        </div>
+        <div class="nav-list">
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>
+          <ul>
+            <li><a href="#hero" data-after="Home" routerLinkActive="active">Home</a></li>
+            <li><a href="#services" data-after="Service">Services</a></li>
+            <li><a href="#inscription" data-after="Projects">S'inscrire</a></li>
+            <li><a href="#about" data-after="About">Equipe</a></li>
+            <li><a href="#contact" data-after="Contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Header -->
+
+
+  <!-- Hero Section  -->
+  <section id="hero">
+    <div class="hero container row" >
+      <div class="col-sm">
+        <h1>Bienvenue sur la plateforme<span></span></h1>
+        <h1>d'acquisition de documents administratifs.<span></span></h1>
+        <h1>Connectez vous et faites une demande<span></span></h1>
+        <a href="#inscription" type="button" class="ct">S'inscrire</a>
+      </div>
+    
+    <div class="col-sm" >
+      </div>
+    </div>
+  </section>
+  <!-- End Hero Section  -->
+
+  <!-- Service Section -->
+  <section id="services">
+    <div class="services container">
+      <div class="service-top">
+        <h1 class="section-title">Ser<span>vi</span>ces</h1>
+      </div>
+      <div class="service-bottom">
+        <div class="service-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+          <h2>Etudiant</h2>
+          <p>Inscrivez vous . Connectez vous. Consultez vos informations personnelles . Faites votre demande. Suivez l'evolution de votre demande
+            Faites votre demande de retrait.</p>
+        </div>
+        <div class="service-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+          <h2>Administrateur</h2>
+          <p>Connectez vous .Gérez toutes les taches d'administration .Créez des comptes. Ajoutez de nouveaux services.
+            Assurez la supervision . Consultez les statistiques globaux</p>
+        </div>
+        <div class="service-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+          <h2>Signataire</h2>
+          <p> Connectez vous. Consultez votre messagerie pour voir les demandes des étudiants . Validez ou rejetez les demandes</p>
+        </div>
+        <div class="service-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
+          <h2>Distributeur</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis debitis rerum, magni voluptatem sed
+            architecto placeat beatae tenetur officia quod</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Service Section -->
+
+  <!-- Projects Section -->
+  <section id="inscription" >
+    <div class="projects ">
+      <div class="projects-header">
+        <h1 class="section-title">Inscri<span>ption</span></h1>
+      </div>
+      <ng-container *ngIf="!isTrue; else elseTemplate">  
+        <div ng-if="" style="padding: 30px; margin-left:100px;margin-right: 100px; border: black solid 1px;">
+           <h1>Verification de l'Etudiant</h1><br/>
+           <form [formGroup]="InfoForm" (ngSubmit)="saveDemande()">
+              <div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="nce">Numero Carte Etudiant ou CNI</label><br/><br/>
+                    <input type="text" formControlName="etudiant" class="form-control" placeholder="Numero: 771781104 OU CNI:12121997026992">
+                  </div>
+                </div><br/>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="InfoForm.invalid">Verifier</button>
+                      
+                  </div>
+    
+                </div>
+              </div>
+           </form>
+        </div>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <div style="padding: 30px; margin-left:100px;margin-right: 100px; border: black solid 1px;">
+          <form [formGroup]="InscriptionForm" (ngSubmit)="saveInscription()">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="nce">Numero Carte Etudiant</label>
+                <input readonly  type="text" class="form-control disabled" id="nce" formControlName="numeroEtudiant" >
+              </div>
+              <div class="form-group col-md-6">
+                <label for="cni">Numero CNI</label>
+                <input readonly type="text" class="form-control" id="cni" class="form-control"  formControlName="cni" minlength="12" >
+                <div *ngIf="fSign.cni.invalid && (fSign.cni.dirty || fSign.cni.touched)"
+                class="alert alert-danger">
+              
+              <div *ngIf="fSign.cni.errors?.required">
+                Renseigner Votre numéro d'idntité nationale
+              </div>
+              <div *ngIf="fSign.cni.errors?.minlength">
+                Erreur sur le nombre de caractères
+                  </div>
+                  </div>
+              </div>
+            </div>
+            <br/>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="prenom">Prénom</label>
+                <input  readonly type="text" class="form-control" name="prenom" id="prenom" formControlName="prenom" required >
+                <div *ngIf="fSign.email.invalid && (fSign.prenom.dirty || fSign.prenom.touched)"
+                class="alert alert-danger">
+              <div *ngIf="fSign.prenom.errors?.required">
+                Renseigner Votre prenomm
+              </div>
+            </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Nom</label>
+                <input readonly type="text" class="form-control" name="nom" id="nom" formControlName="nom">
+                <div *ngIf="fSign.email.invalid && (fSign.nom.dirty || fSign.nom.touched)"
+                class="alert alert-danger">
+              <div *ngIf="fSign.nom.errors?.required">
+                Renseigner Votre Nom
+              </div>
+            </div>
+              </div>
+              </div>
+              <br/>
+            <div class="form-group">
+              <label for="inputAddress">Email</label>
+              <input readonly type="email" class="form-control" name="emmail4" id="email" placeholder="exemple@esp.sn"
+                  formControlName="email" required >
+              <div *ngIf="fSign.email.invalid && (fSign.email.dirty || fSign.email.touched)"
+              class="alert alert-danger">
+          
+            <div *ngIf="fSign.email.errors?.required">
+              Renseigner l'adresse mail
+            </div>
+          </div>
+            </div>
+            <br/>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="password">Mot de passe</label>
+                <input type="password" class="form-control"  id="password" name="password" formControlName="password" required minlength="4" >
+                <div *ngIf="fSign.mdpinvalid && (fSign.password.dirty || fSign.password.touched)"
+                class="alert alert-danger">
+            
+              <div *ngIf="fSign.password.errors?.required">
+                Mot de passe obligatoire
+              </div>
+              <div *ngIf="fSign.password.errors?.minlength">
+                Minimum 4 caractères
+              </div>
+            </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="cmpd">Confirmer Mot de passe</label>
+                <input type="password" class="form-control" id="confirmpassword" formControlName="confirmpassword" required minlength="4" >
+                <div *ngIf="fSign. confirmpassword.invalid && (fSign. confirmpassword.dirty || fSign. confirmpassword.touched)"
+                class="alert alert-danger">
+            
+              <div *ngIf="fSign. confirmpassword.errors?.required">
+                Confirmation obligatoire
+              </div>
+              <div *ngIf="fSign. confirmpassword.errors?.minlength">
+                Minimum 4 caractères
+              </div>
+            </div>
+              </div>
+            </div>
+            <br/>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputemail">Numero de Telephone</label>
+                <input type="numbr" class="form-control" id="inputemail" formControlName="numeroTelephone">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="dept" >Département</label>
+                <select  *ngIf="etudiant!=null" class="custom-select" formControlName="place" [disabled]="etudiant!=null">
+                  <option  [value]="etudiant.placeSignatory.id">{{etudiant.placeSignatory.namePlace}}</option>
+                </select>
+              </div>
+            </div>
+            <br/>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <div class="form-group">
+                  <label for="inputPassword4">Votre option</label>
+                  <input type="text" class="form-control" id="inputPassword4" formControlName="option">
+                
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <div class="form-group">
+                  <label for="inputPassword4">Votre Date de Naissance</label>
+                  <input readonly type="date" [value]="etudiant?etudiant.dateNaissance:''" class="form-control" id="inputPassword4">
+        
+                </div>
+               </div>
+            </div> 
+            <br/>
+            <button type="submit" class="btn btn-success btn-lg btn-block" style="float: right;"
+            [disabled]="!InscriptionForm.valid">Soumettre</button>
+          </form>
+        </div>
+      </ng-template>
+    </div>
+  </section>
+  <!-- End Projects Section -->
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="about container">
+      <div class="col-left">
+        <div class="about-img">
+          <img src="/assets/img/vitrine/img-2.png" alt="Description de l'équipe">
+        </div>
+      </div>
+      <div class="col-right">
+        <h1 class="section-title">Equipe <span></span></h1>
+        <h2>DIC2TR</h2>
+        <h2>2020-2021</h2>
+        <h2>Membres</h2>
+        <p>Nassour AbdelMahmoud<br>Lamarana BARRY<br>Ismaila DANG<br>Ibrahima DIOP<br>Mouhamed Salim SAVANE<br>
+          Mamadou Lamine SENE<br></p> </div>
+    </div>
+  </section>
+  <!-- End About Section -->
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="contact container">
+      <div>
+        <h1 class="section-title">Contact <span>info</span></h1>
+      </div>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/phone.png" /></div>
+          <div class="contact-info">
+            <h1>Phone</h1>
+            <h2>+221 77 538 02 96</h2>
+            <h2>+221 77 178 11 04</h2>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/new-post.png" /></div>
+          <div class="contact-info">
+            <h1>Email</h1>
+            <h2>ibrahimadiop6@esp.sn</h2>
+            <h2>mamadoulaminesene@esp.sn</h2>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/map-marker.png" /></div>
+          <div class="contact-info">
+            <h1>Addresse</h1>
+            <h2>Dakar, Fann Hock, Ecole Supérieure Polytechnique</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Contact Section -->
+
+  <!-- Footer -->
+  <section id="footer">
+    <div class="footer container">
+      <div class="brand">
+        <h1><span>Nom</span>de <span>la</span>plateforme</h1>
+      </div>
+      <h2>Votre plateforme d'acquisition de documents administratifs</h2>
+      <div class="social-icon">
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/facebook-new.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/instagram-new.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/twitter.png" /></a>
+        </div>
+        <div class="social-item">
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/behance.png" /></a>
+        </div>
+      </div>
+      <p>Copyright © 2021 ESP. All rights reserved</p>
+    </div>
+  </section>
+  <!-- End Footer -->
+  <script src="/assets/js/vitrine/app.js"></script>
+</body>

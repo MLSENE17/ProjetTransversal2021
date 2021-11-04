@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { SignataireService } from 'src/app/service/SignataireService';
 
 @Component({
   selector: 'app-home',
@@ -8,26 +10,52 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(private title:Title) { this.title.setTitle("Signataire|Reception")}
-
+  messages:any;
+  formModal=new FormGroup({
+      status:new FormControl(''),
+      numero:new FormControl('')
+  })
+  constructor(private title:Title,private signataireService:SignataireService,
+    private route:Router) { this.title.setTitle("Signataire|Reception")}
+ 
   ngOnInit(): void {
+    this.getAllMessage()
   }
   onUpdate(id:any){
-    console.log(id)
+    this.route.navigate(['signataire','home','message',id])
   }
-  numEtudiant(even:Event){
-     const input =(even.target as HTMLInputElement).value;
+  numEtudiant(){
+     const input =this.formModal.value.numero;
      if(input.length>6){
-       console.log(input)
+      this.getAllMessage()
      }
   }
   getAllMessage():void{
-    console.log("lamine")
+    this.signataireService.getAllSign(this.getForm()).subscribe(
+      (res)=>{
+        this.messages=res     
+      }
+    )
   }
-  getStatus(event:Event){
-    const select = (event.target as HTMLSelectElement).value;
+  getStatus(){
+    const select = this.formModal.value.status
     if(select){
-      console.log(select);
+      this.getAllMessage()
     }
+ 
+  }
+  refresh(){
+    this.formModal.controls.status.setValue('')
+    this.formModal.controls.numero.setValue('')
+    this.getAllMessage()
+  }
+  getForm(){
+    const menus= JSON.parse(localStorage.getItem('user')|| '{}')
+     let donne={
+        id:menus.placeSignatory.id,
+        numero:this.formModal.value.numero?this.formModal.value.numero:null,
+        status:this.formModal.value.status?this.formModal.value.status:null
+     }     
+     return donne;
   }
 }

@@ -10,7 +10,7 @@ import { Menu } from 'src/app/model/Menu';
 export class HeaderComponent implements OnInit {
   menu:any;
   constructor(private route:Router) { 
-    
+     window.scroll(0,0);
   }
   ngOnInit(): void {
     this.getMenus();

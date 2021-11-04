@@ -22,18 +22,91 @@
   </header>
   <br/> <br/> <br/> 
     <div class="mt-5 container">
+      <div *ngIf="isValid" class="row">
+         <div class="col-md-12">
+          <div >
+            <div class="tray tray-center">
+              <div class="panel mb25 mt5">
+                <div class="panel-heading">
+                  <span class="panel-title hidden-xs" style="color: black;">Informations de la personne qui doit retirer le diplome
+                     (Cas d'une personne  á l'exterieur)
+                  </span>
+                </div>
+                <div class="panel-body p25 pb5">
+                  <div class="tab-content pn br-n admin-form">
+                    <div id="tab1_1" class="tab-pane active">
+                    <form class="form-horizontal" [formGroup]="InfoForm" >
+                      <div class="section row">
+                          <div class="col-md-6">
+                            <label for="cni" class="field prepend-icon">
+                              <input type="text" name="cni" id="cni" class="gui-input" placeholder="CNI Acquéreur" 
+                              class="form-control"  formControlName="cni"
+                                      required minlength="10" maxlength="13" >
+                                      <div *ngIf="f.cni.invalid && (f.cni.dirty || f.cni.touched)"
+                                      class="alert alert-danger">
+                                  
+                                    <div *ngIf="f.cni.errors?.required">
+                                      Renseigner le numéro de CNI
+                                    </div>
+                                    <div *ngIf="f.cni.errors?.minlength">
+                                      Le numéro de cni doit etre 10 chiffres
+                                    </div>
+                                    <div *ngIf="f.cni.errors?.maxlength">
+                                      Le numéro de cni doit etre 10 chiffres
+                                    </div>
+                                  </div>
+                              <label for="firstname" class="field-icon">
+                                <i class="fa fa-user"></i>
+                              </label>
+                            </label>
+                          </div>
+                          <div class="col-md-6">
+                            <label for="email" class="field prepend-icon">
+                              <input type="email" name="email" id="email" class="gui-input" placeholder="Téléphone" 
+                              class="form-control"  formControlName="tel"
+                              required minlength="9" maxlength="9" >
+                              <div *ngIf="f.tel.invalid && (f.tel.dirty || f.tel.touched)"
+                              class="alert alert-danger">
+                          
+                            <div *ngIf="f.tel.errors?.required">
+                              Renseigner le numéro de Téléphone
+                            </div>
+                            <div *ngIf="f.tel.errors?.minlength">
+                              Le numéro de Téléphone doit etre 9 chiffres
+                            </div>
+                            <div *ngIf="f.tel.errors?.maxlength">
+                              Le numéro de Téléphone doit etre 9 chiffres
+                            </div>
+                          </div>
+                              <label for="email" class="field-icon">
+                                <i class="fa fa-envelope"></i>
+                              </label>
+                            </label>
+                          </div>
+                      </div>
+                      <div class="col-md-11 control-label">
+                        <button type="submit" class="btn btn-rounded-outline btn-success btn-inline"
+                        [disabled]="!InfoForm.valid">Valider</button>
+                    </div>
+                  </form>
+                    </div></div></div>
+                    </div>
+          </div>
+        </div>
+         </div>
+      </div>
       <div class="row">
            <div class="col-md-12">
               <div class="panel" id="spy4">
                   <div class="panel-heading">
                     <span class="panel-title">
-                      <span class="fa fa-arrows-v"></span></span>
+                      <span class="fa fa-arrows-v"></span> <strong style="color: black;"> {{allSignature?.length?'Demande du Diplome '+allSignature[0].name:null}}</strong></span>
                     <div class="pull-right">
                       <code class="mr20"><b></b></code>
                     </div>
                   </div>
                   <div class="panel-body pn">
-                    <table class="table footable fw-labels" data-page-size="20">
+                    <table class="table footable fw-labels" data-page-size="30">
                       <thead>
                         <tr>
                           <th>
@@ -42,101 +115,21 @@
                           <th data-toggle="true">
                             Signataires
                           </th>
+                          <th data-toggle="true">
+                            message du signataire
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr >
-                          <td>
-                            
-                          </td>
-                          <td>Service Finances<td>
-                        </tr>
-                        <tr >
-                          <td>
-                          </td>
-                          <td>Responsable Bibliothèque Universitaire</td>
-                        </tr>
-                        <tr>
-                          <td>
-                          </td>
-                          <td>Chef de département</td>
-                        </tr>
-                        <tr>
-                          <td>
-                        </td>
-                          <td>Chef des services administratifs</td>
-                        </tr>
+                        <tr *ngFor="let item of allSignature">
+                            <td  [ngClass]="{'success': item.response=='Accept','warning':item.response=='Waiting','danger':item.response=='Refuse'}"><strong>{{item.response}}</strong></td>
+                            <td>{{item.place}}</td>
+                            <td>{{item.message==null?'Non repondu':item.message}}</td>
+                        </tr><tr></tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
-              <div >
-                  <div class="tray tray-center">
-                    <div class="panel mb25 mt5">
-                      <div class="panel-heading">
-                        <span class="panel-title hidden-xs">Informations de Retrait</span>
-                      </div>
-                      <div class="panel-body p25 pb5">
-                        <div class="tab-content pn br-n admin-form">
-                          <div id="tab1_1" class="tab-pane active">
-                          <form class="form-horizontal" [formGroup]="InfoForm" >
-                            <div class="section row">
-                                <div class="col-md-6">
-                                  <label for="cni" class="field prepend-icon">
-                                    <input type="text" name="cni" id="cni" class="gui-input" placeholder="CNI Acquéreur" 
-                                    class="form-control"  formControlName="cni"
-                                            required minlength="10" maxlength="10" >
-                                            <div *ngIf="f.cni.invalid && (f.cni.dirty || f.cni.touched)"
-                                            class="alert alert-danger">
-                                        
-                                          <div *ngIf="f.cni.errors?.required">
-                                            Renseigner le numéro de CNI
-                                          </div>
-                                          <div *ngIf="f.cni.errors?.minlength">
-                                            Le numéro de cni doit etre 10 chiffres
-                                          </div>
-                                          <div *ngIf="f.cni.errors?.maxlength">
-                                            Le numéro de cni doit etre 10 chiffres
-                                          </div>
-                                        </div>
-                                    <label for="firstname" class="field-icon">
-                                      <i class="fa fa-user"></i>
-                                    </label>
-                                  </label>
-                                </div>
-                                <div class="col-md-6">
-                                  <label for="email" class="field prepend-icon">
-                                    <input type="email" name="email" id="email" class="gui-input" placeholder="Téléphone" 
-                                    class="form-control"  formControlName="tel"
-                                    required minlength="9" maxlength="9" >
-                                    <div *ngIf="f.tel.invalid && (f.tel.dirty || f.tel.touched)"
-                                    class="alert alert-danger">
-                                
-                                  <div *ngIf="f.tel.errors?.required">
-                                    Renseigner le numéro de Téléphone
-                                  </div>
-                                  <div *ngIf="f.tel.errors?.minlength">
-                                    Le numéro de Téléphone doit etre 9 chiffres
-                                  </div>
-                                  <div *ngIf="f.tel.errors?.maxlength">
-                                    Le numéro de Téléphone doit etre 9 chiffres
-                                  </div>
-                                </div>
-                                    <label for="email" class="field-icon">
-                                      <i class="fa fa-envelope"></i>
-                                    </label>
-                                  </label>
-                                </div>
-                            </div>
-                            <div class="col-md-11 control-label">
-                              <button type="submit" class="btn btn-rounded-outline btn-success btn-inline"
-                              [disabled]="!InfoForm.valid">Valider</button>
-                          </div>
-                        </form>
-                          </div></div></div>
-                          </div>
-                </div>
-              </div>
            </div>
       </div>
     </div>

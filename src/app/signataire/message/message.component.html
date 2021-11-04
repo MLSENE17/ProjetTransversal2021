@@ -1,0 +1,92 @@
+<div id="main">
+    <app-header></app-header>
+    <section id="content_wrapper">
+      <br/> <br/> <br/> 
+        <header id="topbar" class="alt" style="position: fixed;">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="crumb-active">
+                        <a href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="crumb-icon">
+                        <a href="dashboard.html">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </a>
+                    </li>
+                    <li class="crumb-link">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="crumb-trail">Dashboard</li>
+                </ol>
+            </div>
+        </header>
+        <br/> <br/> <br/> 
+      <div class="mt-5 container">
+        <section id="content" class="table-layout animated fadeIn">
+          <!-- begin: .tray-center -->
+          <div class="row" *ngIf="validations">
+              <div class="col-md-11">
+                <div class="tray tray-center pn">
+                  <div class="panel">
+                    <!-- message toolbar header -->
+                    <div class="panel-menu br-n br-b">
+                          <div class="row">
+                            <h1>Numero Etudiant : <span style="color: brown;">{{validations.numero}}</span>  || Diplome : <span style="color: brown;">{{validations.diplome}}</span></h1>
+                          </div>
+                    </div>
+      
+                    <!-- message view -->
+                    <div class="message-view" style="margin-left: 10px;">
+      
+                      <!-- message body -->
+                      <br/>
+                      <div class="message-body">
+                        <h1 *ngIf="validations.response=='Refuse'" style="color:red">Cette demande a ete refuse mais vous pouvez changer le statut</h1>
+                        <div class="row">
+                           <div class="col-md-4">
+                              <h4>Prenom :  <span style="color: brown;">{{validations.prenom}}</span></h4> 
+                           </div>
+                           <div class="col-md-4">
+                            <h4>Nom  :  <span style="color: brown;">{{validations.nom}}</span></h4> 
+                         </div>
+                        </div> 
+                        <br/>
+                        <div class="row">
+                            
+                            <ng-container *ngIf="validations.response!='Accept'; else elseTemplate">
+                              <div class="col-md-6" >
+    
+                                <button (click)="accept()" class="btn btn-success" style="margin-right:20px">Accepter</button>
+                                <button (click)="refuse()" class="btn btn-danger">Refuser</button>
+                              </div> 
+                            </ng-container>
+                            
+                            <ng-template #elseTemplate>
+                               
+                                <div  class="col-md-6" #elseTemplate>
+                                  <h2>Demande deja accepter!</h2>
+                              </div>
+                            </ng-template>
+                            
+                        </div> 
+                      </div>
+                    </div>
+      
+                    <!-- message reply form -->
+                    <br/> <br/>
+                    <div class="message-reply">
+                      <div class="summernote"></div>
+                    </div>
+      
+                  </div>
+      
+                </div>
+              </div>
+          </div>
+          <!-- end: .tray-center-->
+        </section>
+        <app-footer></app-footer>
+      </div>
+    
+    </section>
+  </div>
