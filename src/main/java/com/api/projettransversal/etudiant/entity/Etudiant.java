@@ -38,7 +38,7 @@ public class Etudiant {
     private String email;
     @NotNull
     @NotBlank
-    private long cni;
+    private String cni;
     @NotNull
     @NotBlank
     @Column(unique = true,name="numero_etudiant",nullable = false)

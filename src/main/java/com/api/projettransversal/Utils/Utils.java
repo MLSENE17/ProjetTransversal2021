@@ -11,4 +11,6 @@ public class Utils {
     public final static String etudiants=parent+"etudiant";
     public final static String demande=parent+"demande";
     public final static String validation=parent+"validation" ;
+    public final static String crent=parent+"auth/crent" ;
+    public final static String signataire=parent+"signataire" ;
 }

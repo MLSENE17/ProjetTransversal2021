@@ -18,7 +18,7 @@ public class RegisterModelEtudiant {
     private String numeroTelephone;
     @NotNull
     @NotBlank
-    private long cni;
+    private String cni;
     @NotNull
     @NotBlank
     private LocalDate dateNaissance;

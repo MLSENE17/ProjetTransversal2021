@@ -7,5 +7,4 @@ public interface ValidationProjection {
     String getPlace();
     String getResponse();
     String getMessage();
-    Date getUpdate();
 }

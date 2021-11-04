@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface DemandeRepository extends JpaRepository<Demande, Long> {
@@ -20,4 +21,6 @@ public interface DemandeRepository extends JpaRepository<Demande, Long> {
     List<DemandeProjection> findAllEtudiant(Etudiant etudiant);
     @Query("select dm.id as id,dm.diplome.nomDiplome as diplome,dm.createAt as create,dm.valide as valide from Demande dm where dm.valide=false and dm.etudiant=:etudiant order by dm.createAt desc")
     List<DemandeProjection> findAllEtudiantCours(@Param("etudiant") Etudiant etudiant);
+    @Query("select d from Demande d where d.id=:id and d.etudiant=:etudiant")
+    Optional<Demande> findIdEmail(Long id, Etudiant etudiant);
 }

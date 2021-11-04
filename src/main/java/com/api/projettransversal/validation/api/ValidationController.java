@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -19,8 +20,12 @@ import java.util.UUID;
 public class ValidationController {
     @Autowired
     private ValidationService validationService;
-    @GetMapping("/{id}")
-    public List<ValidationProjection> getAll(@Valid @PathVariable  Long id){
-        return this.validationService.getAll(id);
+    @GetMapping("/{id}/{email}")
+    public List<ValidationProjection> getAll(@Valid @PathVariable  Long id,@Valid @PathVariable String email){
+        return this.validationService.getAll(id,email);
+    }
+    @GetMapping("valid/{id}/{email}")
+    public Map<String,String> getValid(@Valid @PathVariable  Long id, @Valid @PathVariable String email){
+        return this.validationService.isValid(id,email);
     }
 }
