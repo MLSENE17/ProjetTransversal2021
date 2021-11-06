@@ -20,7 +20,7 @@ public class Crent {
     private String email;
     @ManyToOne(fetch=FetchType.EAGER)
     private PlaceSignatory placeSignatory;
-    private long cni;
+    private String cni;
     private String numeroetudiant;
     private String prenom;
     private String nom;

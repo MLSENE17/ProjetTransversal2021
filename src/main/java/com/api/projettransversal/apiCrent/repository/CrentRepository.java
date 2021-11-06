@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface CrentRepository extends JpaRepository<Crent,Long> {
-    @Query("select u from Crent u where  u.cni =:cni")
-    Optional<Crent>  findByCni(@Param("cni") long cni);
+    @Query("select u from Crent u where  u.cni =:cni or u.numeroetudiant=:cni")
+    Optional<Crent>  findByCni(@Param("cni") String cni);
 }

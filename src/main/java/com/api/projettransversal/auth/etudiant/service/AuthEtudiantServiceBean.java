@@ -46,6 +46,15 @@ public class AuthEtudiantServiceBean implements AuthEtudiantService {
         if(etudiantRepository.existsByEmail(registerModel.getEmail())){
             throw new PersonnelException("Email existe deja");
         }
+        if(etudiantRepository.existsByNumero(registerModel.getNumeroEtudiant())){
+            throw new PersonnelException("le numero etudiant existe deja");
+        }
+        if(etudiantRepository.existsByCni(registerModel.getCni())){
+            throw new PersonnelException("le numero cni existe existe deja");
+        }
+        if(etudiantRepository.existsBynumeroTelephone(registerModel.getNumeroTelephone())){
+            throw new PersonnelException("le numero telephone  existe deja");
+        }
         Role role=roleRepository.findByName(ERole.ROLE_ETUDIANT).orElseThrow(
                 ()->new PersonnelException("role non trouv")
         );
