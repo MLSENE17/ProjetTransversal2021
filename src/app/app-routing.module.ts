@@ -28,10 +28,11 @@ const routes: Routes = [
   {path: 'admin/comptes', component: CompteComponent},
   {path: 'admin/home', component: StatistiqueComponent},
   //personne x
-  {path: 'secretairw/liste', component: ListeComponent},
+  {path: 'secretaire/home', component: ListeComponent},
   //signataire
   {path: 'signataire/home', component: HomeComponent},
   {path: 'signataire/home/message/:id', component: MessageComponent},
+  {path: '**', redirectTo:""},
 ];
 
 @NgModule({
@@ -40,3 +41,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
  }
+ 

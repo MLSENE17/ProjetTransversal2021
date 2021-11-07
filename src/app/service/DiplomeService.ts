@@ -15,4 +15,7 @@ export class DiplomeService{
    updateDiplome(id:any,nameDiplome:any){
     return this.http.put(this.host.getHost()+"diplome/update/"+id,nameDiplome);
     }
+    getTotal(){
+        return this.http.get(this.host.getHost()+"demande/total")
+    }
 }

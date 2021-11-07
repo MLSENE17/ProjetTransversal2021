@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { async } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SignataireService } from 'src/app/service/SignataireService';
 import Swal from 'sweetalert2';
@@ -10,6 +11,7 @@ import Swal from 'sweetalert2';
 export class MessageComponent implements OnInit {
   id:any;
   validations:any;
+  message:any
   constructor(private route:Router,
     private signataireService:SignataireService,
     private activeRoute:ActivatedRoute) { }
@@ -27,7 +29,7 @@ export class MessageComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.signataireService.signIn({id:this.id,response:"Accept"}).subscribe(
+        this.signataireService.signIn({id:this.id,response:"Accept",message:"bien Accepter"}).subscribe(
           (res)=>{
             Swal.fire({
               icon: 'success',
@@ -56,25 +58,30 @@ export class MessageComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-
-        this.signataireService.signIn({id:this.id,response:"Refuse"}).subscribe(
-          (res)=>{
-            Swal.fire({
-              icon: 'success',
-              title: 'Good',
-              text: 'Demande bien enregistrer',
-            })
-             this.route.navigate(['signataire','home'])
-          },
-          (error)=>{
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: 'Erreur au niveau',
-            })
-          }
-        )
-      } 
+          this.main().then(
+            ()=>{
+              if(this.message){      
+                  this.signataireService.signIn({id:this.id,response:"Refuse",message:this.message}).subscribe(
+                    (res)=>{
+                      Swal.fire({
+                        icon: 'success',
+                        title: 'Good',
+                        text: 'Demande bien enregistrer',
+                      })
+                      this.route.navigate(['signataire','home'])
+                    },
+                    (error)=>{
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Erreur au niveau',
+                      })
+                    }
+                  )
+              } 
+            }
+          )
+      }
     })
   }
   getOne(){
@@ -95,5 +102,20 @@ export class MessageComponent implements OnInit {
       }
     )
   }
-
+  main = async()=>{
+    const { value: text } = await Swal.fire({
+      input: 'textarea',
+      inputLabel: 'Motif du Refus \n Le motif du refus est obligatoire pour un refus',
+      inputPlaceholder: 'Type your message here...',
+      inputAttributes: {
+        'aria-label': 'Type your message here',
+        'required':'required'
+      },
+      showCancelButton: false,
+      confirmButtonText:'Valider',
+    })
+    if (text) {
+      this.message=text
+    }
+  }
 }

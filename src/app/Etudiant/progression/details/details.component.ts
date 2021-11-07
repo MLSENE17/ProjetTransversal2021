@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import { EtudiantService } from 'src/app/service/EtudiantService';
 import Swal from 'sweetalert2';
 @Component({
@@ -16,12 +16,10 @@ export class DetailsComponent implements OnInit {
     cni: new FormControl("", [
       Validators.required,
       Validators.minLength(10),
-      Validators.maxLength(13),
     ]),
     tel: new FormControl("", [
       Validators.required,
       Validators.minLength(9),
-      Validators.maxLength(9),
     ]),
   });
 
@@ -59,11 +57,27 @@ export class DetailsComponent implements OnInit {
           title: 'Retrait Diplome',
           text: 'Vous avez toute vos signatures pour cette demande.Veuiller recuperer votre diplome au niveau du secretariat',
         })
+        this.etudiantService.getRetraits(this.id).subscribe(
+          (res:Data)=>{
+            this.InfoForm.controls.cni.setValue(res.cni)
+            this.InfoForm.controls.tel.setValue(res.numero)
+          }
+        )
       },
       (error)=>{
         this.isValid=false
       }
     )
   }
-  
+  onSumbit(){
+    this.etudiantService.saveRetraits(this.id,this.InfoForm.value.cni,this.InfoForm.value.tel).subscribe(
+      (res)=>{
+        Swal.fire({
+          icon: 'info',
+          title: 'Modification Reussi',
+          text: 'Donnee tres bien modifier'
+        })
+      }
+    )
+  }
 }

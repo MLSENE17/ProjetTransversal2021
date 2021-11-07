@@ -8,5 +8,8 @@ export class VitrineService{
    }
    getUser(etudiant:any){
        return this.http.get(this.host.getHost()+"auth/crent/"+etudiant);
+   }
+   getSignup(etudiant:any){
+    return this.http.post(this.host.getHost()+"auth/etudiant/signup",etudiant);
    }   
 }

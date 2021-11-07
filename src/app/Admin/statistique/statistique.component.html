@@ -21,13 +21,13 @@
       </div>
   </header>
   <br/> <br/> <br/> 
-    <div class="mt-5 container">
+    <div *ngIf="total" class="mt-5 container">
       <div class="row">
         <div class="col-md-4">
           <div class="panel panel-tile text-center br-a br-grey">
             <div class="panel-body">
-              <h1 class="fs30 mt5 mbn">1426</h1>
-              <h6 class="text-system">Demandes</h6>
+              <h1 class="fs30 mt5 mbn">{{total.cours}}</h1>
+              <h6 class="text-system">Demande(s)</h6>
             </div>
             <div class="panel-footer br-t p12">
               <span class="fs11">
@@ -40,12 +40,12 @@
         <div  class="col-md-4">
           <div class="panel panel-tile text-center br-a br-grey">
             <div class="panel-body">
-              <h1 class="fs30 mt5 mbn">63262</h1>
-              <h6 class="text-success">Demandes</h6>
+              <h1 class="fs30 mt5 mbn">{{total.termine}}</h1>
+              <h6 class="text-success">Demande(s)</h6>
             </div>
             <div class="panel-footer br-t p12">
               <span class="fs11">
-                <i class="fa fa-arrow-up pr5"></i> Rejetés
+                <i class="fa fa-arrow-up pr5"></i> Terminées
                 <b></b>
               </span>
             </div>
@@ -54,13 +54,12 @@
         <div  class="col-md-4">
           <div class="panel panel-tile text-center br-a br-grey">
             <div class="panel-body">
-              <h1 class="fs30 mt5 mbn">248</h1>
-              <h6 class="text-warning">Demandes</h6>
+              <h1 class="fs30 mt5 mbn">{{total.termine+total.cours}}</h1>
+              <h6 class="text-warning">Demande(s)</h6>
             </div>
             <div class="panel-footer br-t p12">
               <span class="fs11">
                 <i class="fa fa-arrow-up pr5 text-success"></i> Attestation de Réussite
-                <b>DUT</b>
               </span>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { iif } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -59,8 +60,8 @@ export class VitrineComponent implements OnInit {
   });
   constructor(
     private router: Router,
-    private vitrineService:VitrineService
-  ) { }
+    private vitrineService:VitrineService,
+    private title:Title) {this.title.setTitle("Accueil") }
 
   saveDemande() : void{
     this.vitrineService.getUser(this.InfoForm.value.etudiant).subscribe(
@@ -98,7 +99,24 @@ export class VitrineComponent implements OnInit {
         text: "Veuillez entrer des mot de pass identiques"
       })
      }else{
-       console.log(this.InscriptionForm.value);
+       this.vitrineService.getSignup(this.InscriptionForm.value).subscribe(
+         (res)=>{
+          Swal.fire({
+            icon: 'success',
+            title: 'Oops...',
+            text: 'Compte tres bien creer'
+          }) 
+          localStorage.clear()
+          this.router.navigate(['login'])
+         },
+         (error)=>{
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error.error.message
+          }) 
+         }
+       )
      }
   }
 

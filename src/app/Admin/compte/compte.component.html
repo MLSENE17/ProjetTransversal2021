@@ -30,7 +30,7 @@
       <div class="panel" id="spy1">
         <div class="panel-heading">
           <span class="panel-title">
-            <span class="fa fa-table"></span>Liste des diplomes</span>
+            <span class="fa fa-table"></span>Liste des Comptes</span>
          
         </div>
         <div class="panel-body pn">
@@ -40,7 +40,6 @@
                   <th>#</th>
                   <th>Prenom & Nom</th>
                   <th>Email</th>
-                  <th>Role</th> 
                   <th>Lieu</th>
                   <th>Option</th>
                 </tr>
@@ -50,8 +49,7 @@
                   <td>{{i+1}}</td>
                   <td>{{item.prenom+" "+item.nom}}</td>
                   <td>{{item.email}}</td>
-                  <td></td>
-                  <td>{{item.place}}</td>
+                  <td>{{item.place=='No Place'?'':item.place}}</td>
                   <td>
                     <button title='Supprimer {{item.prenom+" "+item.nom}}' type="button" class="btn btn-default light" (click)="onDelete(item.id,item.email)">
                       <i class="fa fa-trash"></i>

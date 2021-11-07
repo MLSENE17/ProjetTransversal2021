@@ -21,4 +21,10 @@ export class EtudiantService{
   getIsValid(id:any,email:any){
     return this.http.get(this.host.getHost()+"validation/valid/"+id+"/"+email)
   }
+  getRetraits(id:any){
+    return this.http.get(this.host.getHost()+"retrait/"+id)
+  }
+  saveRetraits(id:any,cni:any,numero:any){
+    return this.http.get(this.host.getHost()+"retrait/save/"+id+"/"+cni+"/"+numero)
+  }
 }

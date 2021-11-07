@@ -17,6 +17,7 @@
             <li><a href="#hero" data-after="Home" routerLinkActive="active">Home</a></li>
             <li><a href="#services" data-after="Service">Services</a></li>
             <li><a href="#inscription" data-after="Projects">S'inscrire</a></li>
+            <li><a routerLink="/login" data-after="Projects">Se connecter</a></li>
             <li><a href="#about" data-after="About">Equipe</a></li>
             <li><a href="#contact" data-after="Contact">Contact</a></li>
           </ul>
@@ -155,7 +156,7 @@
               <br/>
             <div class="form-group">
               <label for="inputAddress">Email</label>
-              <input readonly type="email" class="form-control" name="emmail4" id="email" placeholder="exemple@esp.sn"
+              <input type="email" class="form-control" name="emmail4" id="email" placeholder="exemple@esp.sn"
                   formControlName="email" required >
               <div *ngIf="fSign.email.invalid && (fSign.email.dirty || fSign.email.touched)"
               class="alert alert-danger">

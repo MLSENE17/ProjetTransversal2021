@@ -32,6 +32,7 @@ import { SignataireService } from './service/SignataireService';
 import { MessageComponent } from './signataire/message/message.component';
 import { VitrineComponent } from './vitrine/vitrine.component';
 import { VitrineService } from './service/VitrineService';
+import { SecretaireService } from './service/SecretaireService';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,6 +73,7 @@ import { VitrineService } from './service/VitrineService';
     EtudiantService,
     SignataireService,
     VitrineService,
+    SecretaireService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

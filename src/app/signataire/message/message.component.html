@@ -42,6 +42,7 @@
                       <br/>
                       <div class="message-body">
                         <h1 *ngIf="validations.response=='Refuse'" style="color:red">Cette demande a ete refuse mais vous pouvez changer le statut</h1>
+                        <h3 *ngIf="validations.response=='Refuse' && validations.message!=null" style="color: tomato;">Motif du Refus : {{validations.message}}</h3>
                         <div class="row">
                            <div class="col-md-4">
                               <h4>Prenom :  <span style="color: brown;">{{validations.prenom}}</span></h4> 

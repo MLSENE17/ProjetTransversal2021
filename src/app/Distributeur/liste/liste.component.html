@@ -1,44 +1,160 @@
-<div class="panel" id="spy2">
-    <div class="panel-heading">
-      <span class="panel-title">
-        <span class="fa fa-search"></span>Liste des documents disponibles</span>
-      <div class="pull-right">
-        <code class="mr20">Vous pouvez filtrer la liste&quot;suivant le critère de votre choix&quot;</code>
+
+  <div id="main">
+    <app-header></app-header>
+    <section id="content_wrapper">
+      <br/> <br/> <br/> 
+        <header id="topbar" class="alt" style="position: fixed;">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="crumb-active">
+                        <a href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="crumb-icon">
+                        <a href="dashboard.html">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </a>
+                    </li>
+                    <li class="crumb-link">
+                        <a href="">Home</a>
+                    </li>
+                    <li class="crumb-trail">Secretaire</li>
+                </ol>
+            </div>
+        </header>
+        <br/> <br/> <br/> 
+  
+      <div   class="mt-5 container">
+        <section id="content" class="animated fadeIn">
+          <div class="panel" id="spy2">
+            <div class="panel-heading">
+              <span class="panel-title">
+                <span class="fa fa-search"></span>Rechercher l'Etudiant</span> 
+            </div>
+            <form [formGroup]="formModal" (ngSubmit)="onSubmit()">
+              <div class="panel-menu">
+                <input formControlName="etudiant" id="fooFilter" type="text" class="form-control" placeholder="Rechercher... par cni ou numero etudiant">
+              </div>
+              <div>
+                <button type="submit" class="btn btn-success"  [disabled]="formModal.invalid || loading">
+                  <div *ngIf="loading">
+                           Loading... <div class="spinner-border text-dark" role="status">
+                           <span class="sr-only">Loading...</span>
+                        </div>
+                  </div>
+                  <span *ngIf="!loading">Rechercher</span></button>
+              </div><br/>
+            </form>
+            <h1 *ngIf="nontrouve" class="text-danger">Pas de demande en cours pour cet etudiant : {{etudiant}}<br/><br/><br/></h1>
+            <div *ngIf="demandes?.length" class="panel-body pn">
+              <h1>Liste des demandes en cours pour L'Etudiant: {{etudiant}}</h1>
+              <table class="table footable" data-filter="#fooFilter">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Nom du Diplome</th>
+                      <th>Toutes les Signataires</th>
+                      <th>Duplicata(5000 FCFA)</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of demandes;index as i" >
+                      <td>{{i+1}}</td>
+                      <td>{{item.demande.diplome}}</td>
+                      <td  class="animated animated-short fadeInUp" [ngClass]="{'text-success': item.all,'text-danger': !item.all}"><strong>{{item.all?"OUI":"NON"}}</strong></td>
+                      <td></td>
+                      <td>
+                          <button class="btn btn-xs btn-primary" (click)="onVoirPlus(item.all,item.demande.id,item.demande.diplome)">Voir Plus</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+          </section>
+      <app-footer></app-footer>
       </div>
-    </div>
-    <div class="panel-menu">
-      <input id="fooFilter" type="text" class="form-control" placeholder="Rechercher...">
-    </div>
-    <div class="panel-body pn">
-      <table class="table footable" data-filter="#fooFilter">
-          <thead>
-            <tr>
-              <th>ID-Demande</th>
-              <th>CNI Acquéreur</th>
-              <th>Nom</th>
-              <th>Nivau</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>84512845</td>
-              <td>1458987401254</td>
-              <td>Bulletin d Notes</td>
-              <td>DUT1</td>
-            </tr>
-            <tr>
-                <td>84512845</td>
-                <td>1458987401254</td>
-                <td>Attestation de Réussite</td>
-                <td>DUT1</td>
-              </tr >           
-              <tr>
-                <td>84512845</td>
-                <td>000000401254</td>
-                <td>Bulletin d Notes</td>
-                <td>Licence 3 </td>
-              </tr>
-          </tbody>
-        </table>
+    
+    </section>
+    <div>
+      <button id="lamine" class="hidden"  type="button"  data-toggle="modal" data-target="#exampleModalCenter11" >Lamine</button>
+       
+      <div  class="modal fade" tabindex="-1" role="dialog" id="exampleModalCenter11" aria-labelledby="gridSystemModalLabel" >
+        <div class="modal-dialog modal-lg" role="document" >
+          
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1>Numero Etudiant : <span style="color: brown;">{{formModal.value.etudiant}}</span>  || Diplome : <span style="color: brown;">{{diplome}}</span></h1>
+                           
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="badge badge-danger">X</span></button>
+            </div>
+            <div class="modal-body">
+               <h2 class="modal-title" id="gridSystemModalLabel" style="position: relative;"></h2> 
+               <div class="row">
+                <div class="col-md-12">
+                   <div class="panel" id="spy4">
+                       <div class="panel-heading">
+                         <span class="panel-title">
+                           <span class="fa fa-arrows-v"></span> <strong style="color: black;">Liste des Signatures</strong></span>
+                         <div class="pull-right">
+                           <code class="mr20"><b></b></code>
+                         </div>
+                       </div>
+                       <div class="panel-body pn">
+                         <table class="table footable fw-labels" data-page-size="30">
+                           <thead>
+                             <tr>
+                               <th>
+                                 Etat
+                               </th>
+                               <th data-toggle="true">
+                                 Signataires
+                               </th>
+                               <th data-toggle="true">
+                                 message du signataire
+                               </th>
+                             </tr>
+                           </thead>
+                           <tbody>
+                             <tr *ngFor="let item of allSignature">
+                                 <td  [ngClass]="{'success': item.response=='Accept','warning':item.response=='Waiting','danger':item.response=='Refuse'}"><strong>{{item.response}}</strong></td>
+                                 <td>{{item.place}}</td>
+                                 <td>{{item.message==null?'Non repondu':item.message}}</td>
+                             </tr><tr></tr>
+                           </tbody>
+                         </table>
+                       </div>
+                     </div>
+                </div>
+           
+              </div>
+              <hr/>
+              <div *ngIf="valide && retrait">
+                <h2>Information du Personne qui doit retirer le diplome</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                       <h4>CNI: <strong>{{retrait.cni}}</strong> </h4>
+                    </div>
+                    <div class="col-md-6">
+                      <h4>Numero de Telephone : <strong>{{retrait.numero}}</strong></h4>
+                   </div>
+                </div>
+              </div>
+          </div> 
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button *ngIf="valide" [disabled]="loading2" type="button" class="btn btn-primary" (click)="valider()" >
+                <div *ngIf="loading2">
+                         Loading... <div class="spinner-border text-dark" role="status">
+                         <span class="sr-only">Loading...</span>
+                      </div>
+                </div>
+                <span *ngIf="!loading2" >Valider</span></button>
+          </div>
+          </div>
+          
+          </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
     </div>
   </div>
+ 

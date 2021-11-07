@@ -35,13 +35,13 @@
                 <div class="panel-body p25 pb5">
                   <div class="tab-content pn br-n admin-form">
                     <div id="tab1_1" class="tab-pane active">
-                    <form class="form-horizontal" [formGroup]="InfoForm" >
+                    <form class="form-horizontal" [formGroup]="InfoForm" (ngSubmit)="onSumbit()" >
                       <div class="section row">
                           <div class="col-md-6">
                             <label for="cni" class="field prepend-icon">
                               <input type="text" name="cni" id="cni" class="gui-input" placeholder="CNI Acquéreur" 
                               class="form-control"  formControlName="cni"
-                                      required minlength="10" maxlength="13" >
+                                      required minlength="10" >
                                       <div *ngIf="f.cni.invalid && (f.cni.dirty || f.cni.touched)"
                                       class="alert alert-danger">
                                   
@@ -49,7 +49,7 @@
                                       Renseigner le numéro de CNI
                                     </div>
                                     <div *ngIf="f.cni.errors?.minlength">
-                                      Le numéro de cni doit etre 10 chiffres
+                                      Le numéro de cni doit superieur a 10 chiffres
                                     </div>
                                     <div *ngIf="f.cni.errors?.maxlength">
                                       Le numéro de cni doit etre 10 chiffres
@@ -62,9 +62,9 @@
                           </div>
                           <div class="col-md-6">
                             <label for="email" class="field prepend-icon">
-                              <input type="email" name="email" id="email" class="gui-input" placeholder="Téléphone" 
+                              <input type="text" class="gui-input" placeholder="Téléphone" 
                               class="form-control"  formControlName="tel"
-                              required minlength="9" maxlength="9" >
+                              >
                               <div *ngIf="f.tel.invalid && (f.tel.dirty || f.tel.touched)"
                               class="alert alert-danger">
                           
@@ -79,7 +79,7 @@
                             </div>
                           </div>
                               <label for="email" class="field-icon">
-                                <i class="fa fa-envelope"></i>
+                                <i class="fa fa-phone"></i>
                               </label>
                             </label>
                           </div>
