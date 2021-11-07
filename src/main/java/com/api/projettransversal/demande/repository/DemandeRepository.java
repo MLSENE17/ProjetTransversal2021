@@ -24,4 +24,8 @@ public interface DemandeRepository extends JpaRepository<Demande, Long> {
     List<DemandeProjection> findAllEtudiantCours(@Param("etudiant") Etudiant etudiant);
     @Query("select d from Demande d where d.id=:id and d.etudiant=:etudiant")
     Optional<Demande> findIdEmail(@Param("id") Long id,@Param("etudiant") Etudiant etudiant);
+    @Query("select count(dm) as total from Demande dm where dm.valide=false")
+    Long getNombreCours();
+    @Query("select count(dm) as total from Demande dm where dm.valide=true")
+    Long getNombreTerminer();
 }

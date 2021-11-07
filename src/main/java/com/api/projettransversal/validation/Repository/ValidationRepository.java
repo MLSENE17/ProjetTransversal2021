@@ -24,6 +24,9 @@ public interface ValidationRepository extends JpaRepository<Validation,Long> {
     @Query("select case when count(dm)>3 then true else  false end from Validation dm " +
             "where dm.demande=:demande and dm.response=:responseEnum")
     boolean isValid(@Param("demande") Demande demande, ResponseEnum responseEnum);
+    @Query("select case when count(dm)>3 then true else  false end from Validation dm " +
+            "where dm.demande.id=:demande and dm.response=:responseEnum")
+    boolean isSecretaire(@Param("demande") Long demande, ResponseEnum responseEnum);
     @Query("select vl.id as id,vl.demande.etudiant.prenom as prenom, vl.demande.etudiant.nom as nom, " +
             "vl.demande.etudiant.numeroEtudiant as numero,vl.demande.diplome.nomDiplome as diplome," +
             "vl.response as response,vl.message as message   from Validation vl where vl.placeSignatory=:placeSignatory and" +

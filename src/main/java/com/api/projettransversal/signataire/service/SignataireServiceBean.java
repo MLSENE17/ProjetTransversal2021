@@ -1,5 +1,7 @@
 package com.api.projettransversal.signataire.service;
 
+import com.api.projettransversal.demande.entity.Retrait;
+import com.api.projettransversal.demande.repository.RetraitRepository;
 import com.api.projettransversal.signataire.api.Request.MessageRequestSignataire;
 import com.api.projettransversal.signataire.api.Request.SearchRequestSignataire;
 import com.api.projettransversal.signataire.api.Request.SignataireProjection;
@@ -24,6 +26,8 @@ public class SignataireServiceBean implements SignataireService {
     private PlaceSignatoryRepository placeSignatoryRepository;
     @Autowired
     private ValidationRepository validationRepository;
+    @Autowired
+    private RetraitRepository retraitRepository;
     @Override
     public List<SignataireProjection> getAll(SearchRequestSignataire searchRequestSignataire) {
         PlaceSignatory placeSignatory = placeSignatoryRepository.findById(searchRequestSignataire.getId()).orElseThrow(
@@ -80,6 +84,13 @@ public class SignataireServiceBean implements SignataireService {
         validation.setResponse(responseEnum);
         validation.setMessage(messageRequestSignataire.getMessage());
         validationRepository.save(validation);
+        if(validationRepository.isValid(validation.getDemande(),ResponseEnum.Accept)){
+            Retrait retrait = new Retrait();
+            retrait.setDemande(validation.getDemande());
+            retrait.setCni(validation.getDemande().getEtudiant().getCni());
+            retrait.setNumero(validation.getDemande().getEtudiant().getNumeroTelephone());
+            retraitRepository.save(retrait);
+        }
         Map<String,String> map = new HashMap<>();
         map.put("ibou","ibou");
         return map;

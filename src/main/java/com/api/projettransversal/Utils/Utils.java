@@ -13,4 +13,6 @@ public class Utils {
     public final static String validation=parent+"validation" ;
     public final static String crent=parent+"auth/crent" ;
     public final static String signataire=parent+"signataire" ;
+    public final static String secretaire=parent+"secretaire" ;;
+    public final static String retrait=parent+"retrait";
 }

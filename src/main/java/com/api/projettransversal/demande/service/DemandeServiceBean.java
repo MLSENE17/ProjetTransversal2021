@@ -17,9 +17,7 @@ import com.api.projettransversal.validation.Entity.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class DemandeServiceBean implements DemandeService{
@@ -82,5 +80,15 @@ public class DemandeServiceBean implements DemandeService{
         );
         List<DemandeProjection> demandeProjectionList=demandeRepository.findAllEtudiantCours(etudiant);
         return demandeProjectionList;
+    }
+
+    @Override
+    public Map<String, Long> getTotal() {
+       Long cours=demandeRepository.getNombreCours();
+       Long termine=demandeRepository.getNombreTerminer();
+       Map<String,Long> map=new HashMap<>();
+       map.put("cours",cours);
+       map.put("termine",termine);
+       return map;
     }
 }

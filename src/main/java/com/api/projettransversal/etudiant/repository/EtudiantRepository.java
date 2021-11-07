@@ -11,11 +11,14 @@ import java.util.Optional;
 public interface EtudiantRepository extends JpaRepository<Etudiant,Long> {
     @Query("select case when count(pl)>0 then true else false end from Etudiant pl where  pl.email=:email")
     boolean existsByEmail(@Param("email") String email);
-    Optional<Etudiant> findByEmail(String email);
+    @Query("select et from Etudiant et where et.email=:email or et.numeroEtudiant=:email")
+    Optional<Etudiant> findByEmail(@Param("email") String email);
     @Query("select case when count(pl)>0 then true else false end from Etudiant pl where  pl.numeroEtudiant =:numeroEtudiant")
     boolean existsByNumero(@Param("numeroEtudiant") String numeroEtudiant);
     @Query("select case when count(pl)>0 then true else false end from Etudiant pl where  pl.cni=:cni")
     boolean existsByCni(@Param("cni") String cni);
     @Query("select case when count(pl)>0 then true else false end from Etudiant pl where  pl.numeroTelephone=:numeroTelephone")
     boolean existsBynumeroTelephone(@Param("numeroTelephone") String numeroTelephone);
+    @Query("select et from Etudiant et where et.cni=:numero or et.numeroEtudiant=:numero")
+    Etudiant findCniOrNumero(@Param("numero") String numero);
 }

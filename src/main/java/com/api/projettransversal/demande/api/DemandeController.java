@@ -10,12 +10,17 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(Utils.demande)
 public class DemandeController {
     @Autowired
     private DemandeService demandeService;
+    @GetMapping("/total")
+    public Map<String,Long> getTotal(){
+        return demandeService.getTotal();
+    }
     @PostMapping
     public Demande createDemande(@Valid @RequestBody DemandeRequest demandeRequest){
        return  demandeService.createDemande(demandeRequest);
