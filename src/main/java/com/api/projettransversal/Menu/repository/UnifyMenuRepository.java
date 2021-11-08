@@ -13,6 +13,6 @@ import java.util.List;
 
 @Repository
 public interface UnifyMenuRepository extends JpaRepository<UnifyMenu,Long> {
-    @Query("select u.name as name,u.nameRoute as nameRoute from UnifyMenu u where u.role.name=:role")
+    @Query("select u.name as name,u.nameRoute as nameRoute,u.icon as icon from UnifyMenu u where u.role.name=:role")
     List<UnifyMenuProjection> findByRole(@Param("role") ERole role);
 }

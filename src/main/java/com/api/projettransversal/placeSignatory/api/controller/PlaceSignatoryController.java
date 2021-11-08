@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Optional;
 @RestController
 @RequestMapping( Utils.placeSignator)
-@PreAuthorize("hasRole('ADMIN')")
 public class PlaceSignatoryController {
     @Autowired
     private PlaceSignatoryRepository placeSignatoryRepository;
@@ -52,5 +51,9 @@ public class PlaceSignatoryController {
     @GetMapping("/all")
     public List<PlaceSignatory> getAll(){
         return this.placeSignatorService.getAll();
+    }
+    @PostMapping("/all/create")
+    public List<PlaceSignatory> create(@Valid @RequestBody List<PlaceSignatorRequest> placeSignatorRequest){
+        return placeSignatorService.createAll(placeSignatorRequest);
     }
 }

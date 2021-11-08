@@ -27,5 +27,7 @@ public class UnifyMenu {
     private String nameRoute;
     @ManyToOne(fetch=FetchType.EAGER)
     private Role role;
-
+    @NotNull
+    @NotBlank
+    private String icon;
 }
