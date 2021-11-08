@@ -48,7 +48,7 @@
             </li>
             <li *ngFor="let item of menu" style="margin-right: 60px;">
                 <a class="accordion-toggle" routerLink='{{item.nameRoute}}' [routerLinkActive]="['actives']" style="height: 50px">
-                    <span class="glyphicon glyphicon-home"></span>
+                    <span [class]="item.icon"></span>
                     <span style="font-size: 15px" class="sidebar-title">{{item.name}}</span>
                     <span class="caret"></span>
                 </a>
