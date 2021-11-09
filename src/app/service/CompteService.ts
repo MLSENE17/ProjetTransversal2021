@@ -6,7 +6,7 @@ export class CompteService{
    constructor(private http:HttpClient,private host:HostService){
    }
    getAllPlace(){
-       return this.http.get(this.host.getHost()+"placesignator/all");
+       return this.http.get(this.host.getHost()+"auth/placesignator/all");
    }
    getAllUsers(){
     return this.http.get(this.host.getHost()+"auth/personel/all");
